@@ -1,5 +1,5 @@
 import http, { IncomingMessage, Server, ServerResponse } from "http";
-import path from "path";
+import { config } from "./config";
 
 const server: Server = http.createServer(
   (req: IncomingMessage, res: ServerResponse) => {
@@ -8,11 +8,16 @@ const server: Server = http.createServer(
       res.writeHead(200, { "content-type": "application/json" });
       res.end(
         JSON.stringify({
-          message: "success",
+          message: "Surver Running.......",
           status: 200,
-          path: req.url,
         })
       );
     }
+    if (req.url == "/api" && req.method == "GET") {
+    }
   }
 );
+
+server.listen(config.port, () => {
+  console.log("server is running.....");
+});
